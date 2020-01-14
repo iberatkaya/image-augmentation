@@ -1,7 +1,6 @@
 <h1 align="center">Image Augmentation</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.2-blue.svg?cacheSeconds=2592000" />
-</p>
+
+[![npm version](https://badge.fury.io/js/image-augmentation.svg)](https://badge.fury.io/js/image-augmentation)
 
 Image Augmentation is an image augemntation tool primarily used in machine learning. It is inspired by the [Augmentor](https://github.com/mdbloice/Augmentor) library in Python. Increase the amount of images in your dataset. Have some randomness by selecting a probability for each operation. The default value for the probability of all operations are 0.5.
 
