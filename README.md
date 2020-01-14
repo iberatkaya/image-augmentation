@@ -1,4 +1,4 @@
-### Image Augmentation
+# Image Augmentation
 
 [![npm version](https://badge.fury.io/js/image-augmentation.svg)](https://badge.fury.io/js/image-augmentation)
 
