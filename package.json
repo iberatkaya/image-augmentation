@@ -1,0 +1,36 @@
+{
+  "name": "image-augmentation",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "author": "iberatkaya",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caki0915/my-awesome-greeter.git"
+  },
+  "keywords": [
+    "Image Augmentation",
+    "Image",
+    "Augmentation",
+    "Machine Learning",
+    "Deep Learning",
+    "Data",
+    "Data Augmentation"
+  ],
+  "dependencies": {
+    "@types/is-image": "^3.0.0",
+    "@types/sharp": "^0.23.1",
+    "fs": "0.0.1-security",
+    "is-image": "^3.0.0",
+    "sharp": "^0.23.4"
+  }
+}
