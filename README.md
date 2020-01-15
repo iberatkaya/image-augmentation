@@ -2,7 +2,7 @@
 
 [![NPM](https://nodei.co/npm/image-augmentation.png)](https://nodei.co/npm/image-augmentation/)
 
-Image Augmentation is an image augemntation tool primarily used in machine learning. It is inspired by the [Augmentor](https://github.com/mdbloice/Augmentor) library in Python. Increase the amount of images in your dataset. Have some randomness by selecting a probability for each operation. The default value for the probability of all operations are 0.5. Check out the [API documentation](https://iberatkaya.github.io/image-augmentation/)!
+Image Augmentation is an image augmentation tool primarily used in machine learning. It is inspired by the [Augmentor](https://github.com/mdbloice/Augmentor) library in Python. Increase the amount of images in your dataset. Have some randomness by selecting a probability for each operation. The default value for the probability of all operations are 0.5. Check out the [API documentation](https://iberatkaya.github.io/image-augmentation/)!
 
 
 ## Install

@@ -1,5 +1,6 @@
 import sharp from 'sharp';
 import path from 'path';
+import appRoot from 'app-root-path';
 import { probabilityFunc, createDir, checkIfDir, allImagesInDir } from './utils';
 
 
@@ -87,7 +88,7 @@ export default class ImageAugmentation {
    static makeGrey = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => {
-            await sharp(image).removeAlpha().greyscale().toFile(path.join(__dirname, output, imagename));
+            await sharp(image).removeAlpha().greyscale().toFile(path.join(appRoot.path, output, imagename));
          }, probability, image, output);
       } catch (e) {
          console.log(e);
@@ -105,7 +106,7 @@ export default class ImageAugmentation {
 
    static rotate = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
-         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
+         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
       }
@@ -122,7 +123,7 @@ export default class ImageAugmentation {
 
    static rotateRight = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
-         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
+         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
       }
@@ -139,7 +140,7 @@ export default class ImageAugmentation {
 
    static rotateLeft = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
-         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree - 180).toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
+         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree - 180).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
       }
@@ -163,7 +164,7 @@ export default class ImageAugmentation {
          if (padding === "bottom" || padding === "right" || padding === "top" || padding === "left")
             extendobj[padding] = amount;
          extendobj.background = { ...background, alpha: 1 }
-         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().extend(extendobj).toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
+         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().extend(extendobj).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
       }
@@ -178,7 +179,7 @@ export default class ImageAugmentation {
 
    static flipX = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
-         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).flop().removeAlpha().toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
+         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).flop().removeAlpha().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
       }
@@ -193,7 +194,7 @@ export default class ImageAugmentation {
 
    static flipY = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
-         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).flip().removeAlpha().toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
+         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).flip().removeAlpha().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
       }
@@ -210,7 +211,7 @@ export default class ImageAugmentation {
 
    static resize = async ({ width, height, probability = 0.5, image, output = "./output" }: CropInterface) => {
       try {
-         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).resize({width, height, fit: 'fill'}).removeAlpha().toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
+         await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).resize({width, height, fit: 'fill'}).removeAlpha().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
       }

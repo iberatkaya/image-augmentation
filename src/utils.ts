@@ -1,5 +1,6 @@
 import isImage from 'is-image';
 import fs from 'fs';
+import appRoot from 'app-root-path';
 import path from 'path';
 const fsp = fs.promises;
 
@@ -20,8 +21,8 @@ export const probabilityFunc = (n: number) => {
  */
 
 export const createDir = (dir: string) => {
-   if (!fs.existsSync(path.join(__dirname, dir))){
-      fs.mkdirSync(path.join(__dirname, dir), {recursive: true});
+   if (!fs.existsSync(path.join(appRoot.path, dir))){
+      fs.mkdirSync(path.join(appRoot.path, dir), {recursive: true});
   }
 }
 
@@ -44,6 +45,6 @@ export const createDir = (dir: string) => {
 export const allImagesInDir = async (dir: string) => {
    let allfiles = await fsp.readdir(dir);
    let imgfiles = allfiles.filter((x: string) => (isImage(x)));
-   let imgfilepaths = imgfiles.map((x: string) => (path.join(__dirname, dir, x)));
+   let imgfilepaths = imgfiles.map((x: string) => (path.join(appRoot.path, dir, x)));
    return imgfilepaths;
 }
