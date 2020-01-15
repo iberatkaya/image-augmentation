@@ -31,7 +31,7 @@ interface MultipleInterface {
    output?: string
 }
 
-export default class ImageAugmentation {
+export class ImageAugmentation {
 
    private static ctr = 1;
 

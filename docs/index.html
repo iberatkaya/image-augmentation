@@ -67,8 +67,9 @@
 				<a href="#image-augmentation" id="image-augmentation" style="color: inherit; text-decoration: none;">
 					<h1>Image Augmentation</h1>
 				</a>
-				<p><a href="https://badge.fury.io/js/image-augmentation"><img src="https://badge.fury.io/js/image-augmentation.svg" alt="npm version"></a></p>
-				<p>Image Augmentation is an image augemntation tool primarily used in machine learning. It is inspired by the <a href="https://github.com/mdbloice/Augmentor">Augmentor</a> library in Python. Increase the amount of images in your dataset. Have some randomness by selecting a probability for each operation. The default value for the probability of all operations are 0.5.</p>
+				<p>Image augmentation package primarily used for machine learning.</p>
+				<p><a href="https://nodei.co/npm/image-augmentation/"><img src="https://nodei.co/npm/image-augmentation.png" alt="NPM"></a></p>
+				<p>Image Augmentation is an image augmentation tool primarily used in machine learning. It is inspired by the <a href="https://github.com/mdbloice/Augmentor">Augmentor</a> library in Python. Increase the amount of images in your dataset. Have some randomness by selecting a probability for each operation. The default value for the probability of all operations are 0.5. Check out the <a href="https://iberatkaya.github.io/image-augmentation/">API documentation</a>!</p>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h2>Install</h2>
 				</a>
@@ -76,74 +77,79 @@
 				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
 					<h2>Examples</h2>
 				</a>
-				<pre><code class="language-javascript">import ImageAugmentation from 'image-augmentation;
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { ImageAugmentation } <span class="hljs-keyword">from</span> <span class="hljs-string">'image-augmentation'</span>;
 
-/**
- * Makes each images in the current directory grey with each having a probability of 0.4
- */
+<span class="hljs-comment">/**
+ * Makes each images in the current directory grey 
+ * with each having a probability of 0.4.
+ */</span>
 ImageAugmentation.makeGrey({
-   probability: 0.4,
-   image: '/'
+   <span class="hljs-attr">probability</span>: <span class="hljs-number">0.4</span>,
+   <span class="hljs-attr">image</span>: <span class="hljs-string">'./'</span>
 });
 
-/**
- * Makes the test.jpg image rotate 120 degrees grey with a probability 0.2
- */
+<span class="hljs-comment">/**
+ * Makes the test.jpg image rotate 120 degrees grey 
+ * with a probability 0.2
+ */</span>
 
 ImageAugmentation.rotate({
-   probability: 0.2,
-   rotationDegree: 120,
-   image: 'test.jpg'
+   <span class="hljs-attr">probability</span>: <span class="hljs-number">0.2</span>,
+   <span class="hljs-attr">rotationDegree</span>: <span class="hljs-number">120</span>,
+   <span class="hljs-attr">image</span>: <span class="hljs-string">'test.jpg'</span>
 });
 
-/**
- * Adds a 120px padding to the top each images in the current directory with each having a probability 0.4. The added pixels color is blue.
- */
+<span class="hljs-comment">/**
+ * Adds a 120px padding to the top each images in the current directory 
+ * with each having a probability 0.4. The added pixel's color is blue.
+ */</span>
 
 ImageAugmentation.addPadding({
-   probability: 0.4
-   amount: 120,
-   background: { b: 255, g: 0, r: 0 },
-   padding: 'top',
-   image: '/'
+   <span class="hljs-attr">probability</span>: <span class="hljs-number">0.4</span>
+   <span class="hljs-attr">amount</span>: <span class="hljs-number">120</span>,
+   <span class="hljs-attr">background</span>: { <span class="hljs-attr">b</span>: <span class="hljs-number">255</span>, <span class="hljs-attr">g</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">r</span>: <span class="hljs-number">0</span> },
+   <span class="hljs-attr">padding</span>: <span class="hljs-string">'top'</span>,
+   <span class="hljs-attr">image</span>: <span class="hljs-string">'./'</span>
 });
 
 
-/**
+<span class="hljs-comment">/**
  * Resize 10 images in the data directory to 280x280.
- */
+ */</span>
 
 ImageAugmentation.run({
-   runFunction: async () =&gt; {
-      const image = './data';
-      await ImageAugmentation.resize({width: 280, height: 120, image, probability: 1});
+   <span class="hljs-attr">runFunction</span>: <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">const</span> image = <span class="hljs-string">'./data'</span>;
+      <span class="hljs-keyword">await</span> ImageAugmentation.resize({<span class="hljs-attr">width</span>: <span class="hljs-number">280</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">120</span>, image, <span class="hljs-attr">probability</span>: <span class="hljs-number">1</span>});
    },
-   outputNumber: 10
+   <span class="hljs-attr">outputNumber</span>: <span class="hljs-number">10</span>
 })
 
-/**
+<span class="hljs-comment">/**
  * Accomplishes the exact result as the function above
- */
+ */</span>
 
 ImageAugmentation.resize({
-   height: 280,
-   width: 280,
-   probability: 1,
-   image: './data'
+   <span class="hljs-attr">height</span>: <span class="hljs-number">280</span>,
+   <span class="hljs-attr">width</span>: <span class="hljs-number">280</span>,
+   <span class="hljs-attr">probability</span>: <span class="hljs-number">1</span>,
+   <span class="hljs-attr">image</span>: <span class="hljs-string">'./data'</span>
 })
 
-/**
- * Make images in the data directory either grey, flip by the x axis, or flip by the y axis determined by their probabilities until 10 images are generated.
- */
+<span class="hljs-comment">/**
+ * Make images in the data directory either grey, flip by the x axis, 
+ * or flip by the y axis determined by their probabilities 
+ * until 10 images are generated.
+ */</span>
 
 ImageAugmentation.executeMultiple({
-   execute: async () =&gt; {
-      const image = './data';
-      await ImageAugmentation.makeGrey({ image, probability: 0.05 });
-      await ImageAugmentation.flipX({ image, probability: 0.5 });
-      await ImageAugmentation.flipY({ image, probability: 0.2 });
+   <span class="hljs-attr">execute</span>: <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">const</span> image = <span class="hljs-string">'./data'</span>;
+      <span class="hljs-keyword">await</span> ImageAugmentation.makeGrey({ image, <span class="hljs-attr">probability</span>: <span class="hljs-number">0.05</span> });
+      <span class="hljs-keyword">await</span> ImageAugmentation.flipX({ image, <span class="hljs-attr">probability</span>: <span class="hljs-number">0.5</span> });
+      <span class="hljs-keyword">await</span> ImageAugmentation.flipY({ image, <span class="hljs-attr">probability</span>: <span class="hljs-number">0.2</span> });
    },
-   outputNumber: 10
+   <span class="hljs-attr">outputNumber</span>: <span class="hljs-number">10</span>
 })
 </code></pre>
 				<a href="#author" id="author" style="color: inherit; text-decoration: none;">

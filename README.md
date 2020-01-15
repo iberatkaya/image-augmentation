@@ -1,6 +1,6 @@
 # Image Augmentation
 
-> Image augmentation package primarily used for machine learning.
+Image augmentation package primarily used for machine learning.
 
 [![NPM](https://nodei.co/npm/image-augmentation.png)](https://nodei.co/npm/image-augmentation/)
 
@@ -14,7 +14,7 @@ npm i image-augmentation
 ```
 ## Examples
 ```javascript
-import ImageAugmentation from 'image-augmentation';
+import { ImageAugmentation } from 'image-augmentation';
 
 /**
  * Makes each images in the current directory grey 
@@ -22,7 +22,7 @@ import ImageAugmentation from 'image-augmentation';
  */
 ImageAugmentation.makeGrey({
    probability: 0.4,
-   image: '/'
+   image: './'
 });
 
 /**
@@ -46,7 +46,7 @@ ImageAugmentation.addPadding({
    amount: 120,
    background: { b: 255, g: 0, r: 0 },
    padding: 'top',
-   image: '/'
+   image: './'
 });
 
 
