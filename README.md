@@ -43,6 +43,45 @@ ImageAugmentation.addPadding({
    padding: 'top',
    image: '/'
 });
+
+
+/**
+ * Resize 10 images in the data directory to 280x280.
+ */
+
+ImageAugmentation.run({
+   runFunction: async () => {
+      const image = './data';
+      await ImageAugmentation.resize({width: 280, height: 120, image, probability: 1});
+   },
+   outputNumber: 10
+})
+
+/**
+ * Accomplishes the exact result as the function above
+ */
+
+ImageAugmentation.resize({
+   height: 280,
+   width: 280,
+   probability: 1,
+   image: './data'
+})
+
+/**
+ * Make images in the data directory either grey, flip by the x axis, or flip by the y axis determined by their probabilities until 10 images are generated.
+ */
+
+ImageAugmentation.executeMultiple({
+   execute: async () => {
+      const image = './data';
+      await ImageAugmentation.makeGrey({ image, probability: 0.05 });
+      await ImageAugmentation.flipX({ image, probability: 0.5 });
+      await ImageAugmentation.flipY({ image, probability: 0.2 });
+   },
+   outputNumber: 10
+})
+
 ```
 
 ## Author
