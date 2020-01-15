@@ -15,6 +15,9 @@ npm i image-augmentation
 ## Examples
 ```javascript
 import { ImageAugmentation } from 'image-augmentation';
+//or
+const ImageAugmentation = require('image-augmentation').ImageAugmentation;
+
 
 /**
  * Makes each images in the current directory grey 
@@ -54,8 +57,8 @@ ImageAugmentation.addPadding({
  * Resize 10 images in the data directory to 280x280.
  */
 
-ImageAugmentation.run({
-   runFunction: async () => {
+ImageAugmentation.executeMultiple({
+   execute: async () => {
       const image = './data';
       await ImageAugmentation.resize({width: 280, height: 120, image, probability: 1});
    },

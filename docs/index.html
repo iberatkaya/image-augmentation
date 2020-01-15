@@ -78,6 +78,9 @@
 					<h2>Examples</h2>
 				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { ImageAugmentation } <span class="hljs-keyword">from</span> <span class="hljs-string">'image-augmentation'</span>;
+<span class="hljs-comment">//or</span>
+<span class="hljs-keyword">const</span> ImageAugmentation = <span class="hljs-built_in">require</span>(<span class="hljs-string">'image-augmentation'</span>).ImageAugmentation;
+
 
 <span class="hljs-comment">/**
  * Makes each images in the current directory grey 
@@ -117,8 +120,8 @@ ImageAugmentation.addPadding({
  * Resize 10 images in the data directory to 280x280.
  */</span>
 
-ImageAugmentation.run({
-   <span class="hljs-attr">runFunction</span>: <span class="hljs-keyword">async</span> () =&gt; {
+ImageAugmentation.executeMultiple({
+   <span class="hljs-attr">execute</span>: <span class="hljs-keyword">async</span> () =&gt; {
       <span class="hljs-keyword">const</span> image = <span class="hljs-string">'./data'</span>;
       <span class="hljs-keyword">await</span> ImageAugmentation.resize({<span class="hljs-attr">width</span>: <span class="hljs-number">280</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">120</span>, image, <span class="hljs-attr">probability</span>: <span class="hljs-number">1</span>});
    },
