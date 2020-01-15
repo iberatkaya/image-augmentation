@@ -12,7 +12,7 @@ npm i image-augmentation
 ```
 ## Examples
 ```javascript
-import ImageAugmentation from 'image-augmentation;
+import ImageAugmentation from 'image-augmentation';
 
 /**
  * Makes each images in the current directory grey with each having a probability of 0.4.
