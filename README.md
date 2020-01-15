@@ -1,6 +1,6 @@
 # Image Augmentation
 
-[![npm version](https://badge.fury.io/js/image-augmentation.svg)](https://badge.fury.io/js/image-augmentation)
+[![NPM](https://nodei.co/npm/image-augmentation.png)](https://nodei.co/npm/image-augmentation/)
 
 Image Augmentation is an image augemntation tool primarily used in machine learning. It is inspired by the [Augmentor](https://github.com/mdbloice/Augmentor) library in Python. Increase the amount of images in your dataset. Have some randomness by selecting a probability for each operation. The default value for the probability of all operations are 0.5. Check out the [API documentation](https://iberatkaya.github.io/image-augmentation/)!
 
@@ -15,7 +15,8 @@ npm i image-augmentation
 import ImageAugmentation from 'image-augmentation';
 
 /**
- * Makes each images in the current directory grey with each having a probability of 0.4.
+ * Makes each images in the current directory grey 
+ * with each having a probability of 0.4.
  */
 ImageAugmentation.makeGrey({
    probability: 0.4,
@@ -23,7 +24,8 @@ ImageAugmentation.makeGrey({
 });
 
 /**
- * Makes the test.jpg image rotate 120 degrees grey with a probability 0.2
+ * Makes the test.jpg image rotate 120 degrees grey 
+ * with a probability 0.2
  */
 
 ImageAugmentation.rotate({
@@ -33,8 +35,8 @@ ImageAugmentation.rotate({
 });
 
 /**
- * Adds a 120px padding to the top each images in the current directory with each having a probability 0.4.
- * The added pixels color is blue.
+ * Adds a 120px padding to the top each images in the current directory 
+ * with each having a probability 0.4. The added pixel's color is blue.
  */
 
 ImageAugmentation.addPadding({
@@ -70,8 +72,9 @@ ImageAugmentation.resize({
 })
 
 /**
- * Make images in the data directory either grey, flip by the x axis, or flip by the y axis determined 
- * by their probabilities until 10 images are generated.
+ * Make images in the data directory either grey, flip by the x axis, 
+ * or flip by the y axis determined by their probabilities 
+ * until 10 images are generated.
  */
 
 ImageAugmentation.executeMultiple({
