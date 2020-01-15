@@ -15,7 +15,7 @@ npm i image-augmentation
 import ImageAugmentation from 'image-augmentation;
 
 /**
- * Makes each images in the current directory grey with each having a probability of 0.4
+ * Makes each images in the current directory grey with each having a probability of 0.4.
  */
 ImageAugmentation.makeGrey({
    probability: 0.4,
@@ -33,7 +33,8 @@ ImageAugmentation.rotate({
 });
 
 /**
- * Adds a 120px padding to the top each images in the current directory with each having a probability 0.4. The added pixels color is blue.
+ * Adds a 120px padding to the top each images in the current directory with each having a probability 0.4.
+ * The added pixels color is blue.
  */
 
 ImageAugmentation.addPadding({
@@ -69,7 +70,8 @@ ImageAugmentation.resize({
 })
 
 /**
- * Make images in the data directory either grey, flip by the x axis, or flip by the y axis determined by their probabilities until 10 images are generated.
+ * Make images in the data directory either grey, flip by the x axis, or flip by the y axis determined 
+ * by their probabilities until 10 images are generated.
  */
 
 ImageAugmentation.executeMultiple({
