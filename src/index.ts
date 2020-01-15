@@ -84,7 +84,7 @@ export default class ImageAugmentation {
     * @description Select a probability and the image or directory. The grey images will be saved to the output directory.
     */
 
-   static makeGrey = async ({ probability = 1, image, output = "./output" }: DefaultInterface) => {
+   static makeGrey = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => {
             await sharp(image).removeAlpha().greyscale().toFile(path.join(__dirname, output, imagename));
@@ -103,7 +103,7 @@ export default class ImageAugmentation {
     * @example Rotation degree 90 will rotate the image right.
     */
 
-   static rotate = async ({ rotationDegree, probability = 1, image, output = "./output" }: RotationInterface) => {
+   static rotate = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
       } catch (e) {
@@ -120,7 +120,7 @@ export default class ImageAugmentation {
     * @example Rotation degree 90 will rotate the image right.
     */
 
-   static rotateRight = async ({ rotationDegree, probability = 1, image, output = "./output" }: RotationInterface) => {
+   static rotateRight = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
       } catch (e) {
@@ -137,7 +137,7 @@ export default class ImageAugmentation {
     * @example Rotation degree 90 will rotate the image left.
     */
 
-   static rotateLeft = async ({ rotationDegree, probability = 1, image, output = "./output" }: RotationInterface) => {
+   static rotateLeft = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree - 180).toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
       } catch (e) {
@@ -157,7 +157,7 @@ export default class ImageAugmentation {
     */
 
 
-   static addPadding = async ({ padding, amount, background, probability = 1, image, output = "./output" }: PaddingInterface) => {
+   static addPadding = async ({ padding, amount, background, probability = 0.5, image, output = "./output" }: PaddingInterface) => {
       try {
          let extendobj = { bottom: 0, top: 0, left: 0, right: 0, background: { r: 0, g: 0, b: 0, alpha: 1 } } as { [key: string]: number | object };
          if (padding === "bottom" || padding === "right" || padding === "top" || padding === "left")
@@ -176,7 +176,7 @@ export default class ImageAugmentation {
     * @description Select a probability and the image or directory. The flipped images will be saved to the output directory.
     */
 
-   static flipX = async ({ probability = 1, image, output = "./output" }: DefaultInterface) => {
+   static flipX = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).flop().removeAlpha().toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
       } catch (e) {
@@ -191,7 +191,7 @@ export default class ImageAugmentation {
     * @description Select a probability and the image or directory. The flipped images will be saved to the output directory.
     */
 
-   static flipY = async ({ probability = 1, image, output = "./output" }: DefaultInterface) => {
+   static flipY = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).flip().removeAlpha().toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
       } catch (e) {
@@ -208,7 +208,7 @@ export default class ImageAugmentation {
     * @description Select a probability and the image or directory. The resized images will be saved to the output directory.
     */
 
-   static resize = async ({ width, height, probability = 1, image, output = "./output" }: CropInterface) => {
+   static resize = async ({ width, height, probability = 0.5, image, output = "./output" }: CropInterface) => {
       try {
          await ImageAugmentation.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).resize({width, height, fit: 'fill'}).removeAlpha().toFile(path.join(__dirname, output, imagename)); }, probability, image, output);
       } catch (e) {
