@@ -1,3 +1,5 @@
 src/
 docs/
 tsconfig.json
+data/
+output/

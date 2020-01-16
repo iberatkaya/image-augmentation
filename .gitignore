@@ -2,3 +2,5 @@ node_modules
 /lib
 /src/output
 /src/data
+/output
+/data

@@ -4,38 +4,48 @@ import appRoot from 'app-root-path';
 import { probabilityFunc, createDir, checkIfDir, allImagesInDir } from './utils';
 
 
-interface DefaultInterface {
+export interface DefaultInterface {
    probability?: number,
    image: Buffer | string,
    output?: string
 }
 
-interface CropInterface extends DefaultInterface{
+export interface CropInterface extends DefaultInterface{
    width: number,
    height: number
 }
 
-interface RotationInterface extends DefaultInterface {
+export interface RotationInterface extends DefaultInterface {
    rotationDegree: number,
 }
 
-interface PaddingInterface extends DefaultInterface {
+export interface PaddingInterface extends DefaultInterface {
    padding: "left" | "right" | "top" | "bottom",
    amount: number,
    background: { r: number, g: number, b: number },
 }
 
-interface MultipleInterface {
-   execute: (...args: any) => Promise<void>,
+export interface MultipleInterface {
+   execute: () => Promise<void>,
    outputNumber: number,
    output?: string
 }
 
+
 export class ImageAugmentation {
 
-   private static ctr = 1;
-
-   private static amount = Infinity;
+   static __utils = () => {
+      let __ctr = 1;
+      let incCtr = () =>{ __ctr++; } 
+      let decCtr = () =>{ __ctr--; } 
+      let getCtr = () =>{ return __ctr; } 
+      let __amount = Infinity;
+      let setAmount = (a: number) =>{ __amount = a; } 
+      let getAmount = () =>{ return __amount; } 
+      return {
+         incCtr, getCtr, decCtr, setAmount, getAmount
+      }
+   }
 
    private static templateFunc = async (func: (image: string | Buffer, imagename: string) => any, probability: number, image: Buffer | string, output: string) => {
       try {
@@ -43,8 +53,8 @@ export class ImageAugmentation {
             throw Error("Probability cannot be greater than 1.");
          else if (probability < 0)
             throw Error("Probability cannot be less than 0.");
-         if (ImageAugmentation.amount < ImageAugmentation.ctr){
-            ImageAugmentation.ctr--;
+         if (ImageAugmentation.__utils().getAmount() < ImageAugmentation.__utils().getCtr()){
+            ImageAugmentation.__utils().decCtr();
             return;
          }
          createDir(output);
@@ -56,19 +66,19 @@ export class ImageAugmentation {
             isDir = false
          if (!isDir) {
             if (probabilityFunc(probability)) {
-               let imagename = ImageAugmentation.ctr.toString() + '.jpg';
-               ImageAugmentation.ctr++;
+               let imagename = ImageAugmentation.__utils().getCtr().toString() + '.jpg';
+               ImageAugmentation.__utils().incCtr();
                await func(image, imagename);
             }
          }
          else {
             let files = await allImagesInDir(image as string);
             for (let i = 0; i < files.length; i++) {
-               if (ImageAugmentation.amount < ImageAugmentation.ctr)
+               if (ImageAugmentation.__utils().getAmount() < ImageAugmentation.__utils().getCtr())
                   return;
                if (probabilityFunc(probability)) {
-                  let imagename = ImageAugmentation.ctr.toString() + '.jpg';
-                  ImageAugmentation.ctr++;
+                  let imagename = ImageAugmentation.__utils().getCtr().toString() + '.jpg';
+                  ImageAugmentation.__utils().incCtr();
                   await func(files[i], imagename);
                }
             }
@@ -224,11 +234,16 @@ export class ImageAugmentation {
     */
 
    static executeMultiple = async ({ execute, outputNumber }: MultipleInterface) => {
-      ImageAugmentation.amount = outputNumber;
-      while (ImageAugmentation.ctr <= ImageAugmentation.amount) {
+      ImageAugmentation.__utils().setAmount(outputNumber);
+      while (ImageAugmentation.__utils().getCtr() <= ImageAugmentation.__utils().getAmount()) {
          await execute();
-         process.stdout.write('\rGenerating: ' + ((ImageAugmentation.ctr-1) / ImageAugmentation.amount * 100) + "%");
+         process.stdout.write('\rGenerating: ' + ((ImageAugmentation.__utils().getCtr()-1) / ImageAugmentation.__utils().getAmount() * 100) + "%");
       }
       process.stdout.write('\n');
    }
 }
+
+ImageAugmentation.makeGrey({
+   image: './src/data/',
+   probability: 1
+})

@@ -33,7 +33,7 @@ export const createDir = (dir: string) => {
  */
 
  export const checkIfDir = async (dir: string) => {
-   const stat = await fsp.lstat(dir);
+   const stat = await fsp.lstat(path.join(appRoot.path, dir));
    return stat.isDirectory();
 }
 
@@ -43,7 +43,7 @@ export const createDir = (dir: string) => {
  */
 
 export const allImagesInDir = async (dir: string) => {
-   let allfiles = await fsp.readdir(dir);
+   let allfiles = await fsp.readdir(path.join(appRoot.path, dir));
    let imgfiles = allfiles.filter((x: string) => (isImage(x)));
    let imgfilepaths = imgfiles.map((x: string) => (path.join(appRoot.path, dir, x)));
    return imgfilepaths;
