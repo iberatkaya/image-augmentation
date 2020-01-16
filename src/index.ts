@@ -242,8 +242,3 @@ export class ImageAugmentation {
       process.stdout.write('\n');
    }
 }
-
-ImageAugmentation.makeGrey({
-   image: './src/data/',
-   probability: 1
-})

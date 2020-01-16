@@ -16,7 +16,7 @@ npm i image-augmentation
 ```javascript
 import { ImageAugmentation } from 'image-augmentation';
 //or
-const ImageAugmentation = require('image-augmentation').ImageAugmentation;
+const { ImageAugmentation } = require('image-augmentation');
 
 
 /**
