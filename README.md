@@ -45,7 +45,7 @@ ImageAugmentation.rotate({
  */
 
 ImageAugmentation.addPadding({
-   probability: 0.4
+   probability: 0.4,
    amount: 120,
    background: { b: 255, g: 0, r: 0 },
    padding: 'top',
