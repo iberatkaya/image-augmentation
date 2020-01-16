@@ -36,6 +36,7 @@ export class ImageAugmentation {
 
    private __ctr = 1;
    private __amount = Infinity;
+   private multiple = false;
 
    private __utils = () => {
       let incCtr = () =>{ this.__ctr++; } 
@@ -51,14 +52,16 @@ export class ImageAugmentation {
 
    private templateFunc = async (func: (image: string | Buffer, imagename: string) => any, probability: number, image: Buffer | string, output: string) => {
       try {
+         if(!this.multiple){
+            this.__utils().setCtr(1);
+            this.__utils().setAmount(Infinity);
+         }
          if (probability > 1)
             throw Error("Probability cannot be greater than 1.");
          else if (probability < 0)
             throw Error("Probability cannot be less than 0.");
-         if (this.__utils().getAmount() < this.__utils().getCtr()){
-            this.__utils().decCtr();
+         if (this.__utils().getAmount() < this.__utils().getCtr())
             return;
-         }
          createDir(output);
          let isDir: boolean;
          if (typeof image === 'string') {
@@ -75,6 +78,8 @@ export class ImageAugmentation {
          }
          else {
             let files = await allImagesInDir(image as string);
+            if(files.length === 0)
+               throw("No images were found.");
             for (let i = 0; i < files.length; i++) {
                if (this.__utils().getAmount() < this.__utils().getCtr())
                   return;
@@ -87,6 +92,7 @@ export class ImageAugmentation {
          }
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -99,12 +105,10 @@ export class ImageAugmentation {
 
    public makeGrey = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
-         this.__utils().setCtr(1)
-         await this.templateFunc(async (image: string | Buffer, imagename: string) => {
-            await sharp(image).removeAlpha().greyscale().toFile(path.join(appRoot.path, output, imagename));
-         }, probability, image, output);
+         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().greyscale().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -119,10 +123,10 @@ export class ImageAugmentation {
 
    public rotate = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
-         this.__utils().setCtr(1)
          await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -137,10 +141,10 @@ export class ImageAugmentation {
 
    public rotateRight = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
-         this.__utils().setCtr(1)
          await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -155,10 +159,10 @@ export class ImageAugmentation {
 
    public rotateLeft = async ({ rotationDegree, probability = 0.5, image, output = "./output" }: RotationInterface) => {
       try {
-         this.__utils().setCtr(1)
          await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().rotate(rotationDegree - 180).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -176,7 +180,6 @@ export class ImageAugmentation {
 
    public addPadding = async ({ padding, amount, background, probability = 0.5, image, output = "./output" }: PaddingInterface) => {
       try {
-         this.__utils().setCtr(1)
          let extendobj = { bottom: 0, top: 0, left: 0, right: 0, background: { r: 0, g: 0, b: 0, alpha: 1 } } as { [key: string]: number | object };
          if (padding === "bottom" || padding === "right" || padding === "top" || padding === "left")
             extendobj[padding] = amount;
@@ -184,6 +187,7 @@ export class ImageAugmentation {
          await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().extend(extendobj).toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -211,10 +215,10 @@ export class ImageAugmentation {
 
    public flipY = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try {
-         this.__utils().setCtr(1)
          await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).flip().removeAlpha().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -229,10 +233,10 @@ export class ImageAugmentation {
 
    public resize = async ({ width, height, probability = 0.5, image, output = "./output" }: CropInterface) => {
       try {
-         this.__utils().setCtr(1)
          await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).resize({width, height, fit: 'fill'}).removeAlpha().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       } catch (e) {
          console.log(e);
+         throw(e);
       }
    }
 
@@ -243,11 +247,20 @@ export class ImageAugmentation {
     */
 
    public executeMultiple = async ({ execute, outputNumber }: MultipleInterface) => {
-      this.__utils().setAmount(outputNumber);
-      while (this.__utils().getCtr() <= this.__utils().getAmount()) {
-         await execute();
-         process.stdout.write('\rGenerating: ' + ((this.__utils().getCtr()-1) / this.__utils().getAmount() * 100) + "%");
+      try{
+         this.__utils().setAmount(outputNumber);
+         this.__utils().setCtr(1);
+         this.multiple = true;
+         while (this.__utils().getCtr() <= this.__utils().getAmount()) {
+            await execute();
+            process.stdout.write('\rGenerating: ' + ((this.__utils().getCtr()-1) / this.__utils().getAmount() * 100).toFixed(0) + "%");
+         }
+         process.stdout.write('\n');
+         this.multiple = false;
+      } catch(e){
+         this.multiple = false;
+         console.log(e);
+         throw(e);
       }
-      process.stdout.write('\n');
    }
-}   
+}

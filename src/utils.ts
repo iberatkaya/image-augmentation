@@ -33,6 +33,7 @@ export const createDir = (dir: string) => {
  */
 
  export const checkIfDir = async (dir: string) => {
+   await createDir(dir);
    const stat = await fsp.lstat(path.join(appRoot.path, dir));
    return stat.isDirectory();
 }
