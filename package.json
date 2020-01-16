@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "prepare": "npm run build",
-    "docs": "typedoc --output docs/ src/ && cd docs/ && touch .nojekyll"
+    "docs": "typedoc --out docs/ src/ && cd docs/ && touch .nojekyll"
   },
   "author": "iberatkaya",
   "license": "ISC",
