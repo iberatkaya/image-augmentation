@@ -18,12 +18,16 @@ import { ImageAugmentation } from 'image-augmentation';
 //or
 const { ImageAugmentation } = require('image-augmentation');
 
+/**
+ * Create an instance of the class.
+*/
+let ia = new ImageAugmentation();
 
 /**
  * Makes each images in the current directory grey 
  * with each having a probability of 0.4.
  */
-ImageAugmentation.makeGrey({
+ia.makeGrey({
    probability: 0.4,
    image: './'
 });
@@ -33,7 +37,7 @@ ImageAugmentation.makeGrey({
  * with a probability 0.2
  */
 
-ImageAugmentation.rotate({
+ia.rotate({
    probability: 0.2,
    rotationDegree: 120,
    image: 'test.jpg'
@@ -44,7 +48,7 @@ ImageAugmentation.rotate({
  * with each having a probability 0.4. The added pixel's color is blue.
  */
 
-ImageAugmentation.addPadding({
+ia.addPadding({
    probability: 0.4,
    amount: 120,
    background: { b: 255, g: 0, r: 0 },
@@ -57,24 +61,24 @@ ImageAugmentation.addPadding({
  * Resize 10 images in the data directory to 280x280.
  */
 
-ImageAugmentation.executeMultiple({
+ia.executeMultiple({
    execute: async () => {
       const image = './data';
-      await ImageAugmentation.resize({width: 280, height: 120, image, probability: 1});
+      await ia.resize({width: 280, height: 120, image, probability: 1});
    },
    outputNumber: 10
-})
+});
 
 /**
  * Accomplishes the exact result as the function above
  */
 
-ImageAugmentation.resize({
+ia.resize({
    height: 280,
    width: 280,
    probability: 1,
    image: './data'
-})
+});
 
 /**
  * Make images in the data directory either grey, flip by the x axis, 
@@ -82,15 +86,15 @@ ImageAugmentation.resize({
  * until 10 images are generated.
  */
 
-ImageAugmentation.executeMultiple({
+ia.executeMultiple({
    execute: async () => {
       const image = './data';
-      await ImageAugmentation.makeGrey({ image, probability: 0.05 });
-      await ImageAugmentation.flipX({ image, probability: 0.5 });
-      await ImageAugmentation.flipY({ image, probability: 0.2 });
+      await ia.makeGrey({ image, probability: 0.05 });
+      await ia.flipX({ image, probability: 0.5 });
+      await ia.flipY({ image, probability: 0.2 });
    },
    outputNumber: 10
-})
+});
 
 ```
 
