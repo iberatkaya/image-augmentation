@@ -56,6 +56,9 @@ export class ImageAugmentation {
             this.__utils().setCtr(1);
             this.__utils().setAmount(Infinity);
          }
+         else{
+            process.stdout.write('\rGenerating: ' + ((this.__utils().getCtr()-1) / this.__utils().getAmount() * 100).toFixed(0) + "%");
+         }
          if (probability > 1)
             throw Error("Probability cannot be greater than 1.");
          else if (probability < 0)
@@ -79,7 +82,7 @@ export class ImageAugmentation {
          else {
             let files = await allImagesInDir(image as string);
             if(files.length === 0)
-               throw("No images were found.");
+               throw("\nNo images were found.");
             for (let i = 0; i < files.length; i++) {
                if (this.__utils().getAmount() < this.__utils().getCtr())
                   return;
@@ -91,7 +94,7 @@ export class ImageAugmentation {
             }
          }
       } catch (e) {
-         console.log(e);
+         this.__utils().setAmount(-1);
          throw(e);
       }
    }
@@ -304,7 +307,6 @@ export class ImageAugmentation {
          this.multiple = true;
          while (this.__utils().getCtr() <= this.__utils().getAmount()) {
             await execute();
-            process.stdout.write('\rGenerating: ' + ((this.__utils().getCtr()-1) / this.__utils().getAmount() * 100).toFixed(0) + "%");
          }
          process.stdout.write('\n');
          this.multiple = false;
