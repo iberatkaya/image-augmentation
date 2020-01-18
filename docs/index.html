@@ -121,19 +121,20 @@ ia.addPadding({
 
 
 <span class="hljs-comment">/**
- * Resize 10 images in the data directory to 280x280.
+ * Resizes 10 images in the data directory to 280x280.
  */</span>
 
 ia.executeMultiple({
    <span class="hljs-attr">execute</span>: <span class="hljs-keyword">async</span> () =&gt; {
       <span class="hljs-keyword">const</span> image = <span class="hljs-string">'./data'</span>;
-      <span class="hljs-keyword">await</span> ia.resize({<span class="hljs-attr">width</span>: <span class="hljs-number">280</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">120</span>, image, <span class="hljs-attr">probability</span>: <span class="hljs-number">1</span>});
+      <span class="hljs-keyword">await</span> ia.resize({<span class="hljs-attr">width</span>: <span class="hljs-number">280</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">280</span>, image, <span class="hljs-attr">probability</span>: <span class="hljs-number">1</span>});
    },
    <span class="hljs-attr">outputNumber</span>: <span class="hljs-number">10</span>
 });
 
 <span class="hljs-comment">/**
- * Accomplishes the exact result as the function above
+ * Accomplishes the exact operation as the function above except the
+ * output size will be equal to all the images in the data directory.
  */</span>
 
 ia.resize({
@@ -145,8 +146,8 @@ ia.resize({
 
 <span class="hljs-comment">/**
  * Make images in the data directory either grey, flip by the x axis, 
- * or flip by the y axis determined by their probabilities 
- * until 10 images are generated.
+ * or flip by the y axis determined by their probabilities until
+ * 10 images are generated.
  */</span>
 
 ia.executeMultiple({

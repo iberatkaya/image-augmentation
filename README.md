@@ -58,19 +58,20 @@ ia.addPadding({
 
 
 /**
- * Resize 10 images in the data directory to 280x280.
+ * Resizes 10 images in the data directory to 280x280.
  */
 
 ia.executeMultiple({
    execute: async () => {
       const image = './data';
-      await ia.resize({width: 280, height: 120, image, probability: 1});
+      await ia.resize({width: 280, height: 280, image, probability: 1});
    },
    outputNumber: 10
 });
 
 /**
- * Accomplishes the exact result as the function above
+ * Accomplishes the exact operation as the function above except the
+ * output size will be equal to all the images in the data directory.
  */
 
 ia.resize({
@@ -82,8 +83,8 @@ ia.resize({
 
 /**
  * Make images in the data directory either grey, flip by the x axis, 
- * or flip by the y axis determined by their probabilities 
- * until 10 images are generated.
+ * or flip by the y axis determined by their probabilities until
+ * 10 images are generated.
  */
 
 ia.executeMultiple({

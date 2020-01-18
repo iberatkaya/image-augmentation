@@ -241,6 +241,57 @@ export class ImageAugmentation {
    }
 
    /**
+    * @param {number} [probability = 0.5] The probability of the function occuring.
+    * @param {string | Buffer} image The path or the Buffer of the image. If the given path is a directory, all images in that directory will be augmenated.
+    * @param {string} [output = "./output"] The output folder in the current directory.
+    * @description Select a probability and the image or directory. The sharpened images will be saved to the output directory.
+    */
+
+   public sharpen = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
+      try{
+         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).sharpen().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
+      }
+      catch(e){
+         console.log(e);
+         throw(e);
+      }
+   }
+
+   /**
+    * @param {number} [probability = 0.5] The probability of the function occuring.
+    * @param {string | Buffer} image The path or the Buffer of the image. If the given path is a directory, all images in that directory will be augmenated.
+    * @param {string} [output = "./output"] The output folder in the current directory.
+    * @description Select a probability and the image or directory. The blurred images will be saved to the output directory.
+    */
+
+   public blur = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
+      try{
+         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).blur().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
+      }
+      catch(e){
+         console.log(e);
+         throw(e);
+      }
+   }
+
+   /**
+    * @param {number} [probability = 0.5] The probability of the function occuring.
+    * @param {string | Buffer} image The path or the Buffer of the image. If the given path is a directory, all images in that directory will be augmenated.
+    * @param {string} [output = "./output"] The output folder in the current directory.
+    * @description Select a probability and the image or directory. The negated images will be saved to the output directory.
+    */
+
+   public negate = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
+      try{
+         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).negate().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
+      }
+      catch(e){
+         console.log(e);
+         throw(e);
+      }
+   }
+
+   /**
     * @param {async () => {}} execute The function in which the member functions of the class should be called.
     * @param {string} outputNumber The number of images desired.
     * @description Select the member functions and the amount of images desired. The functions will be executed until there is the output is equal to the amount of desired images.
