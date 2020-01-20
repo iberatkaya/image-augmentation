@@ -252,7 +252,7 @@ export class ImageAugmentation {
 
    public sharpen = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try{
-         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).sharpen().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
+         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().sharpen().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       }
       catch(e){
          console.log(e);
@@ -269,7 +269,7 @@ export class ImageAugmentation {
 
    public blur = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try{
-         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).blur().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
+         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().blur().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       }
       catch(e){
          console.log(e);
@@ -286,7 +286,7 @@ export class ImageAugmentation {
 
    public negate = async ({ probability = 0.5, image, output = "./output" }: DefaultInterface) => {
       try{
-         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).negate().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
+         await this.templateFunc(async (image: string | Buffer, imagename: string) => { await sharp(image).removeAlpha().negate().toFile(path.join(appRoot.path, output, imagename)); }, probability, image, output);
       }
       catch(e){
          console.log(e);
