@@ -1,5 +1,5 @@
-src/
 docs/
-tsconfig.json
-data/
 output/
+data/
+src/
+tsconfig.json

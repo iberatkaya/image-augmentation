@@ -295,7 +295,12 @@ export class ImageAugmentation {
    }
 
    /**
-    * @param {async () => {}} execute The function in which the member functions of the class should be called.
+    * @callback execute
+    * @async
+    */
+
+   /**
+    * @param {execute} execute The async function in which the member functions of the class should be called.
     * @param {string} outputNumber The number of images desired.
     * @description Select the member functions and the amount of images desired. The functions will be executed until there is the output is equal to the amount of desired images.
     */
